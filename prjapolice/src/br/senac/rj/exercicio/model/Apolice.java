@@ -1,4 +1,4 @@
-package br.senac.rj.exercicio;
+package br.senac.rj.exercicio.model;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

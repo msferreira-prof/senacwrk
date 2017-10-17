@@ -1,34 +1,30 @@
 package br.senac.rj.exercicio;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Scanner;
 
 import br.senac.rj.exercicio.model.Apolice;
+import br.senac.rj.exercicio.simular.bd.MapaApolices;
 
-public class TestarApolice {
-
+public class TestarApoliceMapa {
+	
 	public static void main(String[] args) {
-		List<Apolice> listaApolice = null;
+		MapaApolices apolices = null;
 		float percentualAtualizacao = 0.0f;
 		
-		TestarApolice ta = new TestarApolice();
+		apolices = carregarApolices();
 		
-		listaApolice = ta.carregarApolices();
-		
-		ta.apresentarApolices(listaApolice);
+		apolices.apresentarApolices();
 
-		percentualAtualizacao = ta.informarPercentualAtualizacaoTodasApolices();
-		ta.atualizarApolices(listaApolice, percentualAtualizacao);
+		percentualAtualizacao = informarPercentualAtualizacaoTodasApolices();
 		
-		ta.apresentarApolices(listaApolice);
+		apolices.atualizarApolices(percentualAtualizacao);
+		
+		apolices.apresentarApolices();
 	}
 	
 	@SuppressWarnings("resource")
-	public List<Apolice> carregarApolices() {
-		List<Apolice> apolices = new ArrayList<>();
+	public static MapaApolices carregarApolices() {
+		MapaApolices apolices = new MapaApolices();
 		Scanner entrada;
 		
 		entrada = new Scanner(System.in);
@@ -49,14 +45,14 @@ public class TestarApolice {
 			Apolice apolice = new Apolice(nomeSegurado, idade, uf, valorSegurado);
 			apolice.calcularPremio();
 			
-			apolices.add(apolice);
+			apolices.incluir(apolice);
 		}
 
 		return apolices;
 	}
 
 	@SuppressWarnings("resource")
-	public float informarPercentualAtualizacaoTodasApolices() {
+	public static float informarPercentualAtualizacaoTodasApolices() {
 		float percentualAtualizacao = 0.0f;
 		Scanner entrada;
 		
@@ -66,35 +62,4 @@ public class TestarApolice {
 		
 		return percentualAtualizacao;
 	}
-
-	public void atualizarApolices(List<Apolice> listaApol, float percentual) {
-		for(Apolice apol: listaApol) {
-			apol.atualizarValorSegurado(percentual);
-		}
-	}
-	
-	public void apresentarApolices(List<Apolice> listaApolices) {
-		ListIterator<Apolice> iterator = listaApolices.listIterator();
-		while (iterator.hasNext()) {
-			Apolice ap = iterator.next();
-			System.out.println("Apolice:  " + ap.toString());
-		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

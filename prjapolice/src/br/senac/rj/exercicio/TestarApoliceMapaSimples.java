@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import br.senac.rj.exercicio.model.Apolice;
+
 public class TestarApoliceMapaSimples {
 
 	public static void main(String[] args) {
