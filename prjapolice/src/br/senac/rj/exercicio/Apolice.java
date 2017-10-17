@@ -1,5 +1,8 @@
 package br.senac.rj.exercicio;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class Apolice {
 	private String nomeSegurado;
 	private int idade;
@@ -69,8 +72,12 @@ public class Apolice {
 
 	@Override
 	public String toString() {
-		return "Apolice [nomeSegurado=" + nomeSegurado + ", idade=" + idade + ", uf=" + uf + ", valorSegurado="
-				+ valorSegurado + ", valorPremio=" + valorPremio + ", valorDesconto=" + valorDesconto + "]";
+		NumberFormat dfValores = new DecimalFormat("#,##0.00");
+		return "Apolice [nomeSegurado=" + nomeSegurado + 
+			   ", idade=" + idade + ", uf=" + uf + 
+			   ", valorSegurado=" + dfValores.format(valorSegurado) + 
+			   ", valorPremio=" + dfValores.format(valorPremio) +
+			   ", valorDesconto=" + dfValores.format(valorDesconto) + "]";
 	}
 	
 	public void imprimir() {
