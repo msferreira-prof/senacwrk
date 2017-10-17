@@ -86,7 +86,6 @@ public class Apolice {
 	
 	public void calcularPremio() {
 		double percentual = 0d;
-		double valorDesconto = 0d;
 		double valorBase = 0.0d;
 		
 		// percentual conforme a idade do segurado
