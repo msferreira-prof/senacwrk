@@ -1,133 +1,124 @@
 package br.senac.rj.exercicio.model;
 
-import java.io.Serializable;
-
-public class Apolice implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1675951038069155044L;
-	private long numero;
-	private Segurado segurado;
+public class ApoliceSimples {
+	private String nomeSegurado;
+	private int idade;
 	private String uf;
 	private double valorSegurado;
 	private double valorPremio;
 	private double valorDesconto;
 
-	public long getNumero() {
-		return numero;
+	public String getNomeSegurado() {
+		return nomeSegurado;
 	}
 
-	public void setNumero(long numero) {
-		this.numero = numero;
+	public void setNomeSegurado(String nomeSegurado) {
+		this.nomeSegurado = nomeSegurado;
 	}
-
-	public Segurado getSegurado() {
-		return segurado;
+	
+	public int getIdade() {
+		return idade;
 	}
-
-	public void setSegurado(Segurado segurado) {
-		this.segurado = segurado;
+	
+	public void setIdade(int idade) {
+		this.idade = idade;
 	}
-
+	
 	public String getUf() {
 		return uf;
 	}
-
+	
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-
+	
 	public double getValorSegurado() {
 		return valorSegurado;
 	}
-
+	
 	public void setValorSegurado(double valorSegurado) {
 		this.valorSegurado = valorSegurado;
 	}
-
+	
 	public double getValorPremio() {
 		return valorPremio;
 	}
-
+	
 	public void setValorPremio(double valorPremio) {
 		this.valorPremio = valorPremio;
 	}
-
+	
 	public double getValorDesconto() {
 		return valorDesconto;
 	}
-
+	
 	public void setValorDesconto(double valorDesconto) {
 		this.valorDesconto = valorDesconto;
 	}
 
-	public Apolice() {
-		super();
-	}
-
-	public Apolice(long numero, Segurado segurado, String uf, double valorSegurado) {
-		super();
-		this.numero = numero;
-		this.segurado = segurado;
+	public ApoliceSimples(String nomeSegurado, int idade, String uf, double valorSegurado) {
+		this.nomeSegurado = nomeSegurado;
+		this.idade = idade;
 		this.uf = uf;
 		this.valorSegurado = valorSegurado;
 	}
 
-	@Override
-	public String toString() {
-		return "Apolice [numero=" + numero + "segurado=" + segurado + ", uf=" + getUf() + ", valorSegurado="
-				+ getValorSegurado() + ", valorPremio=" + getValorPremio() + ", valorDesconto=" + getValorDesconto() + "]";
+	public ApoliceSimples() {
+		super();
 	}
 
+	@Override
+	public String toString() {
+		return "Apolice [nomeSegurado=" + nomeSegurado + ", idade=" + idade + ", uf=" + uf + ", valorSegurado="
+				+ valorSegurado + ", valorPremio=" + valorPremio + ", valorDesconto=" + valorDesconto + "]";
+	}
+	
 	public void imprimir() {
 		System.out.println(this.toString());
 	}
-
+	
 	public void calcularPremio() {
 		double percentual = 0d;
 		double valorDesconto = 0d;
 		double valorBase = 0.0d;
-
+		
 		// percentual conforme a idade do segurado
-		if (this.segurado.getIdade() < 18) {
+		if (this.idade < 18) {
 			percentual = 2.5 / 100.0;
-		} else if (this.segurado.getIdade() >= 18 & this.segurado.getIdade() <= 25) {
+		} else if (this.idade >= 18 & this.idade <= 25) {
 			percentual = 15.0 / 100.0;
-		} else if (this.segurado.getIdade() > 25 & this.segurado.getIdade() <= 36) {
+		} else if (this.idade > 25 & this.idade <= 36) {
 			percentual = 10.0 / 100.0;
 		} else {
 			percentual = 5.0 /100.0;
 		}
-
+		
 		// calcular valor de desconto
-		valorBase = this.getValorSegurado() * percentual;
+		valorBase = this.valorSegurado * percentual;
 		this.calcularValorDesconto(valorBase);
-
-		this.setValorPremio(valorBase - this.getValorDesconto());
+		
+		this.valorPremio = valorBase - this.valorDesconto; 
 	}
-
+	
 	private void calcularValorDesconto(double valorBase) {
 		double percentualDesconto = 0.0d;
-
-		if ("RJ".equalsIgnoreCase(this.getUf())) {
+		
+		if ("RJ".equalsIgnoreCase(this.uf)) {
 			percentualDesconto = 10d / 100d;
-		} else if ("PR".equalsIgnoreCase(this.getUf())) {
+		} else if ("PR".equalsIgnoreCase(this.uf)) {
 			percentualDesconto = 15d / 100d;
-		} else if ("SP".equalsIgnoreCase(this.getUf())) {
+		} else if ("SP".equalsIgnoreCase(this.uf)) {
 			percentualDesconto = 9d / 100d;
 		} else { // MG
 			percentualDesconto = 12d / 100d;
 		}
-
-		this.setValorDesconto(valorBase * percentualDesconto);
+		
+		this.valorDesconto = valorBase * percentualDesconto;
 	}
-
+	
 	public void atualizarValorSegurado(float percentual) {
-		this.setValorSegurado(this.getValorSegurado() * (1 + percentual / 100.0d));
-		this.calcularPremio();
+		this.valorSegurado = this.valorSegurado * (1 + percentual / 100.0d);
+		this.calcularPremio();		
 	}
-
-
+	
 }

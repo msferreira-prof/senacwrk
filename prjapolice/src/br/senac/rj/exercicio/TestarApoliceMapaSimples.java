@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import br.senac.rj.exercicio.model.Apolice;
+import br.senac.rj.exercicio.model.ApoliceSimples;
 
 public class TestarApoliceMapaSimples {
 
 	public static void main(String[] args) {
-		Map<Integer, Apolice> mapaApolices = new HashMap<>();
+		Map<Integer, ApoliceSimples> mapaApolices = new HashMap<>();
 		float percentualAtualizacao = 0.0f;
 		
 		TestarApoliceMapaSimples ta = new TestarApoliceMapaSimples();
@@ -27,8 +27,8 @@ public class TestarApoliceMapaSimples {
 	}
 	
 	@SuppressWarnings("resource")
-	public Map<Integer, Apolice> carregarApolices() {
-		Map<Integer, Apolice> apolices = new HashMap<>();
+	public Map<Integer, ApoliceSimples> carregarApolices() {
+		Map<Integer, ApoliceSimples> apolices = new HashMap<>();
 		Scanner entrada;
 		
 		entrada = new Scanner(System.in);
@@ -46,7 +46,7 @@ public class TestarApoliceMapaSimples {
 			System.out.print("Informe a UF do segurado ('MG', 'PR', 'RJ', 'SP'): ");
 			String uf = entrada.nextLine().substring(0, 2);
 			
-			Apolice apolice = new Apolice(nomeSegurado, idade, uf, valorSegurado);
+			ApoliceSimples apolice = new ApoliceSimples(nomeSegurado, idade, uf, valorSegurado);
 			apolice.calcularPremio();
 			
 			int ultimaChaveMapa = recuperarUltimaChaveMapa(apolices);
@@ -68,24 +68,24 @@ public class TestarApoliceMapaSimples {
 		return percentualAtualizacao;
 	}
 
-	public void atualizarApolices(Map<Integer, Apolice> mapaApolices, float percentual) {
+	public void atualizarApolices(Map<Integer, ApoliceSimples> mapaApolices, float percentual) {
 		Set<Integer> chaves = mapaApolices.keySet();
 		for(Integer chave: chaves) {
 			mapaApolices.get(chave).atualizarValorSegurado(percentual);
 		}
 	}
 	
-	public void apresentarApolices(Map<Integer, Apolice> mapaApolices) {
+	public void apresentarApolices(Map<Integer, ApoliceSimples> mapaApolices) {
 		Set<Integer> chaves = mapaApolices.keySet();  
 		Iterator<Integer> iterator = chaves.iterator();
 		while (iterator.hasNext()) {
 			Integer chave = iterator.next();
-			Apolice ap = mapaApolices.get(chave);
+			ApoliceSimples ap = mapaApolices.get(chave);
 			System.out.printf("Apolice [%d]:  %s\n", chave.intValue(), ap.toString());
 		}
 	}
 	
-	public int recuperarUltimaChaveMapa(Map<Integer, Apolice> mapaApolices) {
+	public int recuperarUltimaChaveMapa(Map<Integer, ApoliceSimples> mapaApolices) {
 		int novaChave = 0;
 		
 		if (mapaApolices.isEmpty() | mapaApolices.size() == 0) {

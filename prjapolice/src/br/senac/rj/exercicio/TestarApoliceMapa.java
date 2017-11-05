@@ -2,8 +2,8 @@ package br.senac.rj.exercicio;
 
 import java.util.Scanner;
 
-import br.senac.rj.exercicio.model.Apolice;
-import br.senac.rj.exercicio.simular.bd.MapaApolices;
+import br.senac.rj.exercicio.model.ApoliceSimples;
+import br.senac.rj.exercicio.simulacaobancodados.MapaApolices;
 
 public class TestarApoliceMapa {
 	
@@ -42,7 +42,7 @@ public class TestarApoliceMapa {
 			System.out.print("Informe a UF do segurado ('MG', 'PR', 'RJ', 'SP'): ");
 			String uf = entrada.nextLine().substring(0, 2);
 			
-			Apolice apolice = new Apolice(nomeSegurado, idade, uf, valorSegurado);
+			ApoliceSimples apolice = new ApoliceSimples(nomeSegurado, idade, uf, valorSegurado);
 			apolice.calcularPremio();
 			
 			apolices.incluir(apolice);
